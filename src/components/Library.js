@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
-import {CardGrid, Card} from "@vkontakte/vkui";
+import {CardGrid, Card, Header} from "@vkontakte/vkui";
 import Data from '../api/Data.js'
 
 
@@ -22,8 +22,9 @@ export default class Library extends Component{
                             <Card key={i} size={sizes[Math.random() % 3]} onClick={() => {
                                 this.props.onTextSelected(i)
                             }}>
-                                <div style={{height: 96}}>
-                                    {item}
+                                <div style={{height: 66}}>
+                                    <Header>{item}</Header>
+
                                 </div>
                             </Card>
                         )

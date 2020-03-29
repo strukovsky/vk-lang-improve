@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import ReactDOM from 'react-dom'
 import Data from "../api/Data";
 import {Button, Checkbox, FormLayout} from "@vkontakte/vkui";
 import Header from "@vkontakte/vkui/dist/components/Header/Header";

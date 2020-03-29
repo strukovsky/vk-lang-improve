@@ -1,5 +1,5 @@
-let data = [
-    [
+let texts = [
+        {paragraphs: [
         {
 
             ru: "Привет! Я Вова",
@@ -27,7 +27,28 @@ let data = [
             es: "Yo soy un alumno excelente"
         }
     ],
-    [
+            questions: [
+                {
+                    title: "Что любит Вова?",
+                    variants: [
+                        "Компьютеры",
+                        "Конструкторы",
+                        "Енотов"
+                    ],
+                    correct: 0
+                },
+                {
+                    title: "Как учится Вова?",
+                    variants: [
+                        "Плохо",
+                        "Средне",
+                        "Он отличник"
+                    ],
+                    correct: 2
+                }
+            ]
+        },
+    {paragraphs: [
         {
             ru: "Я живу рядом с заводом",
             en: "I live near the factory",
@@ -52,27 +73,49 @@ let data = [
             fr: "Mais je dois le partir",
             es: "Pero yo tengo que dejarlo"
         }
-    ]
+    ],
+     questions: [
+         {
+             title: "Где живет главный герой?",
+             variants: [
+                 "В Кисловодске",
+                 "Рядом с Красной Площадью",
+                 "Около завода"
+             ],
+             correct: 2
+         },
+         {
+             title: "Что хочет сделать главный герой?",
+             variants: [
+                 "Поступить в университет",
+                 "Купить новый дом",
+                 "Найти работу"
+             ],
+             correct: 1
+         }
+     ]
+    }
 ];
+
 
 let titles = [
     "Про Вовчика", "Про меня"
 ];
 
-let langs_count = 4;
+let languages_count = 4;
 
 let languages = [
     {code: "ru", verbose: "Русский"},
     {code: "fr", verbose: "Французский"},
     {code: "en", verbose: "Английский"},
-    {code: "es", verbose: "Испанский"}]
+    {code: "es", verbose: "Испанский"}];
 
 
 export default class Data{
 
     static getLanguages()
     {
-        return languages
+        return languages;
     }
 
     static getVerbose(code)
@@ -85,25 +128,30 @@ export default class Data{
         return result
     }
 
-    static getText(textId, langs)
+    static getText(textId, languages)
     {
-            let paragraphs = []
-            langs.forEach(function(item, i, arr){
-                let paragraph = data[textId][i][item];
+            let paragraphs = [];
+            languages.forEach(function(item, i, _){
+                let paragraph = texts[textId].paragraphs[i][item];
                 paragraphs.push(paragraph);
             });
-            let len = langs.length;
-            if(len < langs_count)
+            let len = languages.length;
+            if(len < languages_count)
             {
-                for(let i = len; i < langs_count; i++)
+                for(let i = len; i < languages_count; i++)
                 {
-                    paragraphs.push(data[textId][i][langs[len-1]])
+                    paragraphs.push(texts[textId].paragraphs[i][languages[len-1]])
                 }
             }
         return {
                 paragraphs,
                 title: titles[textId]
         }
+    }
+
+    static getQuestions(textId)
+    {
+        return texts[textId].questions
     }
 
     static getTexts() {
