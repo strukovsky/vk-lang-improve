@@ -18,6 +18,7 @@ class App extends Component {
     };
     this.onStoryChange = this.onStoryChange.bind(this);
     this.onTextSelected = this.onTextSelected.bind(this);
+    this.onLanguagesChanged =  this.onLanguagesChanged.bind(this);
   }
 
   onStoryChange(e)
@@ -79,7 +80,7 @@ class App extends Component {
          <View id={"profile"} activePanel={"profile"}>
              <Panel id={"profile"}>
                  <PanelHeader>Профиль</PanelHeader>
-                 <Profile/>
+                 <Profile onLanguagesChanged={this.onLanguagesChanged}/>
              </Panel>
          </View>
      </Epic>

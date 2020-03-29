@@ -19,7 +19,7 @@ export default class Library extends Component{
             <CardGrid>
                 {
                     list.map((item, i) => (
-                            <Card size={sizes[Math.random() % 3]} onClick={() => {
+                            <Card key={i} size={sizes[Math.random() % 3]} onClick={() => {
                                 this.props.onTextSelected(i)
                             }}>
                                 <div style={{height: 96}}>

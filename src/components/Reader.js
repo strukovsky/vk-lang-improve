@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
-import {Group, CardGrid, Card, Header} from "@vkontakte/vkui";
+import {Group, CardGrid, Card, Header, FormLayout} from "@vkontakte/vkui";
 import Data from "../api/Data";
 
 export default class Reader extends Component{
@@ -8,9 +8,9 @@ export default class Reader extends Component{
         let text = Data.getText(this.props.textId, this.props.languages)
         return(
             <Group separator={"hide"} header={<Header mode={"secondary"}>{text.title}</Header>}>
-                <CardGrid>
+                <FormLayout>
                     {text.paragraphs.map((value, i) => (
-                        <Card>
+                        <Card key={i}>
                             <div style={{height:96}}>
                                 {value}
                             </div>
@@ -18,7 +18,7 @@ export default class Reader extends Component{
                     ))
 
                     }
-                </CardGrid>
+                </FormLayout>
             </Group>
         )
     }
