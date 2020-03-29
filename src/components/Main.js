@@ -4,14 +4,20 @@ import Reader from "./Reader";
 import '@vkontakte/vkui/dist/vkui.css'
 import Library from "./Library";
 import Profile from "./Profile";
+import Cookie from "../cookie/Cookie";
 export default class Main extends Component {
     constructor(props) {
         super(props);
-
+        let languages = JSON.parse(Cookie.getLanguages());
+        let activeStory = "library";
+        if(!languages){
+            activeStory = "profile";
+            languages = ["ru", "fr"]
+        }
         this.state = {
-            activeStory: 'profile',
+            activeStory: activeStory,
             textId: 0,
-            languages: ["ru", "fr"]
+            languages: languages
         };
         this.onStoryChange = this.onStoryChange.bind(this);
         this.onTextSelected = this.onTextSelected.bind(this);
