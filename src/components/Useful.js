@@ -8,9 +8,11 @@ export default class Useful extends Component
         return (
             <CardGrid>
                 {Data.getUseful(this.props.textId, this.props.languages).map((item, i)=>(
-                    <Card key={i}>
-                        <div style={{height: 96}}>
-                            {item}
+                    <Card className={"usefulCard"} key={i} onClick={() => {
+                        document.getElementById(i).innerText = item.translation;
+                    }}>
+                        <div style={{height: 58}} id={i}>
+                            {item.word}
                         </div>
                     </Card>
                 ))

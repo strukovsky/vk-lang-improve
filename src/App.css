@@ -2,23 +2,30 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.usefulCard{
+  padding-top: 20px;
+  text-align: center;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.TabbarItem__text{
+  font-size: 18px;
+}
+/*.usefulCard:hover{
+  transform: rotateY(180deg);
+
+}*/
+/*.TabbarItem__text{
+  font-size: 24pt;
 }
 
-.App-intro {
-  font-size: large;
+.Card__in{
+  font-size: 18pt;
+  padding-left: 50px;
+  padding-top: 30px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+.Header__content{
+  font-size: 23pt;
+
+}*/
+

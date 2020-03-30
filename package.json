@@ -7,7 +7,9 @@
     "react-dom": "^16.13.1",
     "react-scripts": "0.9.5",
     "@vkontakte/vkui": "latest",
-    "history": "latest"
+    "history": "latest",
+    "js-cookie": "latest",
+    "@vkontakte/icons": "latest"
   },
   "devDependencies": {
     "react-router-dom": "^5.1.2"

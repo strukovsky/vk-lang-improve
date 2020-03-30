@@ -51,15 +51,17 @@ let texts = [
         useful: [
             {},
             {
-                en: "Im fond of - я люблю",
-                fr: "Je aime - я люблю",
-                es: "Me gustan - мне нравятся"
+                ru: "Я люблю (мне нравится)",
+                en: "Im fond of",
+                fr: "Je aime",
+                es: "Me gusta"
             },
             {},
             {
-                en: "Excellent - превосходный",
-                fr: "Excellent - превосходный",
-                es: "Excelente - превосходный",
+                ru: "превосходный",
+                en: "Excellent",
+                fr: "Excellent",
+                es: "Excelente",
             }
         ]
     },
@@ -113,16 +115,15 @@ let texts = [
         useful: [
             {},
             {
-                en: "to buy - купить",
-                fr: "acheter - купить",
-                es: "comprar - купить",
+                ru: "купить",
+                en: "to buy",
+                fr: "acheter",
+                es: "comprar",
             },
             {
-                en: "my city - мой город",
-                fr: "ma ville natale - мой родной город",
-                es: "mi cuidad de nacio - мой родной город"
-            },
-            {}
+                en: "my native city", ru: "мой родной город",
+                fr: "ma ville natale", es: "mi cuidad de nacio"
+            }, {}
 
 
         ]
@@ -137,10 +138,10 @@ let titles = [
 let languages_count = 4;
 
 let languages = [
-    {code: "ru", verbose: "Русский"},
-    {code: "fr", verbose: "Французский"},
-    {code: "en", verbose: "Английский"},
-    {code: "es", verbose: "Испанский"}];
+    {code: "ru", verbose: "Русском"},
+    {code: "fr", verbose: "Французском"},
+    {code: "en", verbose: "Английском"},
+    {code: "es", verbose: "Испанском"}];
 
 
 export default class Data {
@@ -149,12 +150,12 @@ export default class Data {
         return languages;
     }
 
-    static getBeautiful(languages)
-    {
-        let result = "";
-        languages.forEach(elem => {
+    static getBeautiful(languages) {
+        let result = "Сейчас ты читаешь на ";
+        languages.forEach((elem, i) => {
             result += Data.getVerbose(elem);
-            result += " ";
+            if(i < languages.length-1)
+            result += ", ";
         });
         return result;
     }
@@ -194,28 +195,23 @@ export default class Data {
         return titles
     }
 
-    static getUseful(textId, languages)
-    {
+    static getUseful(textId, languages) {
         let usefuls = texts[textId].useful;
         let result = [];
         languages.forEach((item, i) => {
             let t = usefuls[i];
-            if(typeof t[item] != "undefined")
-            {
-                result.push(t[item]);
+            if (typeof t[item] !== "undefined") {
+                result.push({word: t[item], translation: t.ru});
             }
         });
         let len = languages.length;
-        if(len < languages_count)
-            for(let i = len; i < languages_count; i++)
-            {
+        if (len < languages_count)
+            for (let i = len; i < languages_count; i++) {
                 let t = usefuls[i];
-                if(typeof t[languages[len-1]] != "undefined")
-                {
-                    result.push(t[languages[len-1]]);
+                if (typeof t[languages[len - 1]] != "undefined") {
+                    result.push({word: t[languages[len - 1]], translation: t.ru});
                 }
             }
-        console.log(result);
         return result;
     }
 

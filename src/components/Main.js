@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
 import {View, Epic, Tabbar, TabbarItem, Panel, PanelHeader} from '@vkontakte/vkui'
 import Reader from "./Reader";
-import '@vkontakte/vkui/dist/vkui.css'
 import Library from "./Library";
 import Profile from "./Profile";
 import Cookie from "../cookie/Cookie";
+import Icon28ArticleOutline from '@vkontakte/icons/dist/28/article_outline';
+import Icon28GridSquareOutline from '@vkontakte/icons/dist/28/grid_square_outline';
+import Icon28Menu from '@vkontakte/icons/dist/28/menu';
 export default class Main extends Component {
     constructor(props) {
         super(props);
-        let languages = JSON.parse(Cookie.getLanguages());
+        let languages = ["ru", "fr"];
+        try {
+            languages = JSON.parse(Cookie.getLanguages());
+
+        }
+        catch (e) {
+            console.log(e);
+
+        }
         let activeStory = "library";
         if(!languages){
             activeStory = "profile";
@@ -49,23 +59,24 @@ export default class Main extends Component {
                   tabbar={
                       <Tabbar>
                           <TabbarItem
+
                               onClick={this.onStoryChange}
                               selected={this.state.activeStory === 'reader'}
                               data-story={"reader"}
                               text={"Читаем"}
-                          />
+                          ><Icon28ArticleOutline/></TabbarItem>
                           <TabbarItem
                               onClick={this.onStoryChange}
                               selected={this.state.activeStory === 'library'}
                               data-story={"library"}
                               text={"Библиотека"}
-                          />
+                          ><Icon28GridSquareOutline/></TabbarItem>
                           <TabbarItem
                               onClick={this.onStoryChange}
                               selected={this.state.activeStory === 'profile'}
                               data-story={"profile"}
                               text={"Профиль"}
-                          />
+                          ><Icon28Menu/></TabbarItem>
                       </Tabbar>
                   }
             >

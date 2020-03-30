@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {FormLayout, FormStatus, Header, Radio, Snackbar, Avatar} from "@vkontakte/vkui";
+import {FormLayout, Header, Radio, Snackbar} from "@vkontakte/vkui";
 import Data from "../api/Data";
 
 export default class CheckYourself extends Component {

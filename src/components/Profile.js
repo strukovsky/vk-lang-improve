@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Data from "../api/Data";
-import {Button, Checkbox, FormLayout} from "@vkontakte/vkui";
+import {Button, Checkbox, FormLayout, FormStatus} from "@vkontakte/vkui";
 import Header from "@vkontakte/vkui/dist/components/Header/Header";
 import Cookie from "../cookie/Cookie";
 let languages = Data.getLanguages();
@@ -8,7 +8,16 @@ let languages = Data.getLanguages();
 export default class Profile extends Component{
     constructor(props) {
         super(props);
-        let languages = JSON.parse(Cookie.getLanguages());
+
+        let languages = ["ru", "fr"];
+        try {
+            languages = JSON.parse(Cookie.getLanguages());
+
+        }
+        catch (e) {
+            console.log(e);
+
+        }
         let beautiful = Data.getBeautiful(languages);
         this.state = {
             choice: languages,
@@ -19,11 +28,11 @@ export default class Profile extends Component{
 
     handleChange(code, isChecked)
     {
-        console.log(isChecked);
+        let changedChoice = [];
         if(isChecked)
         {
 
-            let changedChoice = this.state.choice;
+            changedChoice = this.state.choice;
             changedChoice.push(code);
 
             this.setState({choice: changedChoice})
@@ -31,32 +40,38 @@ export default class Profile extends Component{
         }
         else
         {
-            let changedChoice = []
+
             this.state.choice.forEach(item => {
-                if(item!== code)
-                changedChoice.push(item)
+                if(item !== code)
+                {
+                    changedChoice.push(item);
+                }
             });
-            this.setState((state, props) => ({
+            this.setState({
                 choice: changedChoice
-            }));
+            });
         }
 
-        let beautiful = "";
-        this.state.choice.forEach(item => {
+        let beautiful = "Сейчас ты читаешь на ";
+        if(changedChoice.length === 0)
+        {
+            this.setState({beautiful: "Ничего не выбрано ("});
+            return;
+        }
+        changedChoice.forEach((item, i) => {
             beautiful += Data.getVerbose(item);
-            beautiful += " ";
+            if(i < changedChoice.length-1)
+            beautiful += ", ";
         });
 
         this.setState({beautiful: beautiful});
-
-        this.forceUpdate();
 
     }
 
     render() {
         return(
-            <FormLayout>
-                <Header>Текущий выбор: {this.state.beautiful}</Header>
+            <FormLayout >
+                <Header>{this.state.beautiful}</Header>
                 {                languages.map((item, i) => (
                     <Checkbox checked={this.state.choice.indexOf(item.code) !== -1} key={i} onChange={
                         (e) => {this.handleChange(item.code, e.target.checked)}
@@ -64,9 +79,19 @@ export default class Profile extends Component{
                 ))
                 }
                 <Button onClick={() => {
-                    Cookie.changeLanguages(this.state.choice);
-                    this.props.onLanguagesChanged(this.state.choice);
+                    if(this.state.choice.length === 0 || (this.state.choice.length===1 && this.state.choice[0] === 'ru'))
+                    {
+                        document.getElementById("status").style.visibility = "visible";
+                    }
+                    else
+                    {
+                        document.getElementById("status").style.visibility = "hidden";
+                        Cookie.changeLanguages(this.state.choice);
+                        this.props.onLanguagesChanged(this.state.choice);
+                    }
                 }}>Сохранить изменения</Button>
+                <FormStatus mode="error" id={"status"} style={{visibility: "hidden"}}>Может стоит выбрать какие-нибудь иностранные языки? Хотяб один :)</FormStatus>
+
             </FormLayout>
         )
     }
