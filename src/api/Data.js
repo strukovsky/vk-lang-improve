@@ -173,12 +173,15 @@ export default class Data {
         let paragraphs = [];
         languages.forEach(function (item, i, _) {
             let paragraph = texts[textId].paragraphs[i][item];
-            paragraphs.push(paragraph);
+            let translation = texts[textId].paragraphs[i].ru;
+            paragraphs.push({paragraph, translation});
         });
         let len = languages.length;
         if (len < languages_count) {
             for (let i = len; i < languages_count; i++) {
-                paragraphs.push(texts[textId].paragraphs[i][languages[len - 1]])
+                let paragraph = texts[textId].paragraphs[i][languages[len - 1]];
+                let translation = texts[textId].paragraphs[i].ru;
+                paragraphs.push({paragraph, translation});
             }
         }
         return {

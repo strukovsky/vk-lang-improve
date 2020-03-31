@@ -9,13 +9,24 @@ export default class Reader extends Component{
         let text = Data.getText(this.props.textId, this.props.languages);
         return(
             <div>
-                <Group separator={"show"} header={<Header mode={"secondary"}>{text.title}</Header>}>
+                <Group separator={"show"} header={<Header mode={"secondary"}>{text.title} (Нажми на абзац, чтобы увидеть его перевод)</Header>}>
                     <FormLayout>
-                        {text.paragraphs.map((value, i) => (
-                            <Card key={i} style={{display: "flex"}}>
-                                <div style={{height:96, margin: "auto"}}>
-                                    {value}
+                        {text.paragraphs.map((item, i) => (
+                            <Card  style={{height: 96}}key={i} onClick={() => {
+                                document.getElementById("reader" + i).classList.toggle('visited');
+
+                            }}>
+                                <div className="flip-container" id={"reader" + i}>
+                                    <div className="flipper">
+                                        <div className="front">
+                                            {item.paragraph}
+                                        </div>
+                                        <div className="back">
+                                            {item.translation}
+                                        </div>
+                                    </div>
                                 </div>
+
                             </Card>
                         ))
 
