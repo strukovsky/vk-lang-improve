@@ -20,7 +20,7 @@ export default class Main extends Component {
 
         }
         let activeStory = "library";
-        if(!languages){
+        if(!Cookie.isAuth()){
             activeStory = "profile";
             languages = ["ru", "fr"]
         }

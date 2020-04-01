@@ -61,7 +61,7 @@ export default class Hello extends Component {
                                 Укажи, пожалуйста, языки, которые ты хочешь подтянуть:
                             </Cell>
                             <CellButton onClick={() => {
-                                Cookie.setAuth();
+
                                 window.location.replace("http://localhost:3000/main/")
                             }
                             }>

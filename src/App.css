@@ -2,18 +2,23 @@
   text-align: center;
 }
 
-.usefulCard{
-  padding-top: 20px;
-  text-align: center;
+
+
+.Card__in{
+  padding-top: 30px;
+  display: flex;
 }
 
-.TabbarItem__text{
-  font-size: 18px;
+
+.Library__item{
+
 }
+
 
 /* весь контейнер поддерживает перспективу */
 .flip-container {
 
+  margin: auto;
   perspective: 1000px;
   display: flex;
 }
@@ -26,7 +31,7 @@
 
 /* здесь находится скорость перевертывания */
 .flipper {
-  transition: 0.6s;
+  transition: 0.3s;
   transform-style: preserve-3d;
   display: flex;
 }
@@ -49,27 +54,4 @@
 
 
 
-
-
-
-
-
-/*.usefulCard:hover{
-  transform: rotateY(180deg);
-
-}*/
-/*.TabbarItem__text{
-  font-size: 24pt;
-}
-
-.Card__in{
-  font-size: 18pt;
-  padding-left: 50px;
-  padding-top: 30px;
-}
-
-.Header__content{
-  font-size: 23pt;
-
-}*/
 

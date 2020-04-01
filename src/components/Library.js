@@ -19,10 +19,10 @@ export default class Library extends Component{
             <CardGrid>
                 {
                     list.map((item, i) => (
-                            <Card key={i} size={sizes[Math.random() % 3]} onClick={() => {
+                            <Card key={i} className={"Library__item"} size={sizes[Math.random() % 3]} onClick={() => {
                                 this.props.onTextSelected(i)
                             }}>
-                                <div style={{height: 66}}>
+                                <div style={{height: 66, margin: "auto"}}>
                                     <Header>{item}</Header>
 
                                 </div>

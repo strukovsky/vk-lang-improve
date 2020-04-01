@@ -86,6 +86,8 @@ export default class Profile extends Component{
                     else
                     {
                         document.getElementById("status").style.visibility = "hidden";
+                        if(!Cookie.isAuth())
+                        Cookie.setAuth();
                         Cookie.changeLanguages(this.state.choice);
                         this.props.onLanguagesChanged(this.state.choice);
                     }
